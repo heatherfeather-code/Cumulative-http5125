@@ -1,5 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Cumulative1.Models.Teacher
+<div class="teacher-container">
+<h1 class="teacher-headings">@Model.TeacherFName @Model.TeacherLName</h1>
+<h2 class="teacher-subheadings"> Teacher Id</h2>
+<p> @Model.TeacherId</p>
+<h2 class="teacher-subheadings"> Employee Number</h2>
+<p> @Model.EmployeeNumber</p>
+<h2 class="teacher-subheadings"> Hire Date:</h2>
+<p>@Model.TeacherHireDate.ToString("yyyy-M-d")</p>
+</div>
+
+
+<style>
+	.teacher-container{
+		max-width:540px;
+		margin:15px auto;
+		border: 1.5px solid #ffff;
+		background-color:cadetblue;
+		border-radius:15px;
+		padding:20px;
+		font-family:franklin 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	}
+
+	.teacher-headings{
+		font:2em;
+		font-weight:Bold;
+		color: #8c52a8;
+		text-align:center;
+
+	}
+	.teacher-subheadings{
+		font:1.5em;
+		font-weight:bold;
+		color: #d13894;
+		text-align:center;
+	}
+	p{
+		text-align:center;
+	}
+
+
+</style>
+ 

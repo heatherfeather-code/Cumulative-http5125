@@ -1,1 +1,43 @@
-﻿
+﻿@using Cumulative1.Models
+
+@model IEnumerable<Teacher>
+@foreach(Teacher Teacher in Model)  
+{
+	<div class="teacher-container">
+		<h1 class="teacher-headings"> Teachers</h1>
+		<a href="/TeacherPage/ListTeacher/@Teacher.TeacherId">@Teacher.TeacherFName @Teacher.TeacherLName</a>
+	</div>
+	   
+}
+
+<style>
+	.teacher-container{
+		max-width:540px;
+		margin:15px auto;
+		border: 1.5px solid #ffff;
+		background-color:cadetblue;
+		border-radius:15px;
+		padding:20px;
+		font-family:franklin 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+		text-align:center;
+	}
+
+	.teacher-headings{
+		font:2em;
+		font-weight:Bold;
+		color: #8c52a8;
+		text-align:center;
+
+	}
+	.teacher-subheadings{
+		font:1.5em;
+		font-weight:bold;
+		color: #d13894;
+		text-align:center;
+	}
+	a{
+		color: #d13894;
+	}
+
+
+</style>

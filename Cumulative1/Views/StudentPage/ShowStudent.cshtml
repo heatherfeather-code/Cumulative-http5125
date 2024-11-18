@@ -1,5 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Cumulative1.Models.Student
+<h1>@Model.StudentFName @Model.StudentLName</h1>
+<h2>Student Id</h2>
+<p>@Model.StudentId</p>
+<h2>Student Number</h2>
+<p> @Model.StudentNumber</p>
+<h2> Enrolment Date</h2>
+<p> @Model.StudentEnrolDate.ToString("yyyy-M-d")</p>

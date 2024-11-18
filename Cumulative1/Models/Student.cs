@@ -13,6 +13,6 @@ namespace Cumulative1.Models
         public string StudentFName { get; set; }
         public string StudentLName { get; set; }
         public string StudentNumber { get; set; }
-        public DateOnly StudentEnrolDate { get; set; }
+        public DateTime StudentEnrolDate { get; set; }
     }
 }

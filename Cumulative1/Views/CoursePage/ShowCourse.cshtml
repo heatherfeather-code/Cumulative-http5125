@@ -1,5 +1,11 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Cumulative1.Models.Course
+<h1>@Model.CourseId @Model.CourseCode @Model.CourseName</h1>
+
+<h2>Course Id</h2>
+<p>@Model.CourseId</p>
+
+<h2>Course Code</h2>
+<p>@Model.CourseCode</p>
+
+<h2>CourseName</h2>
+<p>@Model.CourseName</p>

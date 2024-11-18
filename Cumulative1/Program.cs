@@ -1,3 +1,4 @@
+using Cumulative1.Controllers;
 using Cumulative1.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,9 @@ builder.Services.AddControllersWithViews();
 
 // Add DB context to services
 builder.Services.AddScoped<SchoolDbContext>();
+builder.Services.AddScoped<TeacherAPIController>();
+builder.Services.AddScoped<StudentAPIController>();
+builder.Services.AddScoped<CourseAPIController>();
 
 var app = builder.Build();
 
