@@ -1,11 +1,16 @@
 ﻿@using Cumulative1.Models
 
 @model IEnumerable<Teacher>
+<a href="/TeacherPage/AddTeacher">Add Teacher</a>
+<a href="/TeacherPage/DeleteConfirm/id">Delete Teacher</a>
 @foreach(Teacher Teacher in Model)  
 {
+	
 	<div class="teacher-container">
+
 		<h1 class="teacher-headings"> Teachers</h1>
-		<a href="/TeacherPage/ListTeacher/@Teacher.TeacherId">@Teacher.TeacherFName @Teacher.TeacherLName</a>
+		<a href="/TeacherPage/ShowTeacher/@Teacher.TeacherId">@Teacher.TeacherFName @Teacher.TeacherLName</a>
+		<a href="/TeacherPage/DeleteConfirm/@Teacher.TeacherId">Delete Teacher</a>
 	</div>
 	   
 }
@@ -34,7 +39,7 @@
 		font-weight:bold;
 		color: #d13894;
 		text-align:center;
-	}
+	} 
 	a{
 		color: #d13894;
 	}
