@@ -1,0 +1,34 @@
+﻿@model Cumulative1.Models.Student
+<div id="container">
+	<nav><a href="/StudentPage/ListStudent">Back to Students</a></nav>
+	<h2>New Student</h2>
+	<form method="POST" action="/StudentPage/Create">
+		<div class="input-row">
+			<label for="StudentFName">First Name</label>
+			<input type="text"id="StudentFName" name="StudentFName"/>
+		</div>
+		<div class="input-row">
+			<label for="StudentLName">Last Name</label>
+			<input type="text" id="StudentLName" name="StudentLName"/>
+		</div>
+
+		<div class="input-row"> 
+			<label for="StudentNumber">Student Number</label>
+			<input type="text" id="StudentNumber" name="StudentNumber"/>
+		</div>
+
+		<div class="input-row">
+			<label for="StudentEnrolDate"> Enrolment Date</label>
+			<input type="datetime" id="StudentEnrolDate" name="StudentEnrolDate"/>
+		</div>
+
+		<div class="input-row"> 
+			<label for="StudentId">Student Id</label>
+			<input type="text" id="StudentId" name="StudentId"/>
+		</div>
+
+		<div class="input-row">
+			<input type="submit" value="Create Student" />
+		</div>
+	</form>
+</div>

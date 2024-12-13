@@ -1,10 +1,14 @@
 ﻿@using Cumulative1.Models
-
+<nav>
+	<a href="/StudentPage/AddStudent">Add Student</a>
+	
+</nav>
 @model IEnumerable<Student>
 @foreach(Student student in Model)
 {
 	<div>
 		<h1>Students</h1>
-		<a href="/StudentPage/ListStudent/@student.StudentId"> @student.StudentFName @student.StudentLName</a>
+		<a href="/StudentPage/ShowStudent/@student.StudentId"> @student.StudentFName @student.StudentLName</a>
+		<a href="/StudentPage/EditStudent/@student.StudentId"> Update Student</a>
 	</div>
 }

@@ -1,5 +1,6 @@
 ﻿@model Cumulative1.Models.Course
-<h1>@Model.CourseId @Model.CourseCode @Model.CourseName</h1>
+<a href="/CoursePage/ListCourses">Return to Courses</a>
+<h1>@Model.CourseName @Model.CourseCode</h1>
 
 <h2>Course Id</h2>
 <p>@Model.CourseId</p>
@@ -7,5 +8,10 @@
 <h2>Course Code</h2>
 <p>@Model.CourseCode</p>
 
-<h2>CourseName</h2>
-<p>@Model.CourseName</p>
+<h2>Course Start Date</h2>
+<p>@Model.CourseStartDate</p>
+
+<h2>Course End Date</h2>
+<p>@Model.CourseEndDate</p>
+
+

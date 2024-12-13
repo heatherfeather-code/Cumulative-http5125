@@ -1,0 +1,42 @@
+﻿@model Cumulative1.Models.Teacher
+<div id="container">
+	<nav>
+		<a class="nav" href="/TeacherPage/ListTeacher">Back to Teachers</a>
+	</nav>
+	<h2>Update Teacher Info</h2>
+	<form method="POST" action="/TeacherPage/UpdateTeacher">
+		<div>
+			<label for="TeacherId">Teacher Id</label>
+			<input type="text" id="TeacherId" name="TeacherId" value="@Model.TeacherId" />
+		</div>
+		<div class="input-row">
+			<label for="TeacherFName">First Name:</label>
+			<input type="text" id="TeacherFname" name="TeacherFname" value="@Model.TeacherFName" />
+		</div>
+
+		<div class="input-row">
+			<label for="TeacherLName">Last Name:</label>
+			<input type="text" id="TeacherLname" name="TeacherLname" value="@Model.TeacherLName" />
+		</div>
+
+		<div class="input-row">
+			<label for="EmployeeNumber">Employee Number:</label>
+			<input type="text" id="EmployeeNumber" name="EmployeeNumber" value="@Model.EmployeeNumber" />
+		</div>
+
+
+		<div class="input-row">
+			<label for="TeacherHireDate">Hire Date:</label>
+			<input type="datetime" id="TeacherHireDate" name="TeacherHireDate" value="@Model.TeacherHireDate" />
+		</div>
+
+		<div class="input-row">
+			<label for="TeacherSalary">Salary:</label>
+			<input type="number" id="TeacherSalary" name="TeacherSalary" value="@Model.TeacherSalary" />
+		</div>
+
+		<div class="input-row">
+			<input type="submit" value="Update Teacher" />
+		</div>
+	</form>
+</div>

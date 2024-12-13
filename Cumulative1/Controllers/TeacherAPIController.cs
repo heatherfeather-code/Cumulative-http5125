@@ -18,16 +18,16 @@ namespace Cumulative1.Controllers
             _context = context;
         }
 
-		/// <summary>
-		/// this controller will access connected database and list
-		/// all teachers from the school database
-		/// </summary>
-		/// <exmaple>
-		/// GET api/TeacherPage/ ListTeacher {"teacherId":1,"teacherFName": Aaron, "teacherLName": Smith, "Hiredate": 2020-4-6,"Salary": 60.65}
-		/// GET api/TeacherPage/ListTeacher { 1, Jim Smith, 2009-07-08, 70.98}
-		/// </exmaple>
-		/// <returns></returns>
-		[HttpGet]
+        /// <summary>
+        /// this controller will access connected database and list
+        /// all teachers from the school database
+        /// </summary>
+        /// <exmaple>
+        /// GET api/TeacherPage/ ListTeacher {"teacherId":1,"teacherFName": Aaron, "teacherLName": Smith, "Hiredate": 2020-4-6,"Salary": 60.65}
+        /// GET api/TeacherPage/ListTeacher { 1, Jim Smith, 2009-07-08, 70.98}
+        /// </exmaple>
+        /// <returns></returns>
+        [HttpGet]
         [Route(template: "ListTeachers")]
         public List<Teacher> ListTeachers()
         {
@@ -67,11 +67,11 @@ namespace Cumulative1.Controllers
                         Teachers.Add(CurrentTeacher);
                     }
 
-					return Teachers;
+                    return Teachers;
 
-				}
+                }
 
-			}
+            }
 
         }
         /// <summary>
@@ -105,32 +105,32 @@ namespace Cumulative1.Controllers
 
                 using (MySqlDataReader ResultSet = Command.ExecuteReader())
                 {
-                   
-                        while (ResultSet.Read())
+
+                    while (ResultSet.Read())
+                    {
+                        //return all information on all teachers
+                        int Id = Convert.ToInt32(ResultSet["teacherid"]);
+                        string FirstName = ResultSet["teacherfname"].ToString();
+                        string LastName = ResultSet["teacherlname"].ToString();
+                        string EmployeeNumber = ResultSet["employeenumber"].ToString();
+                        DateTime TeacherHireDate = Convert.ToDateTime(ResultSet["hiredate"]);
+                        float Salary = Convert.ToSingle(ResultSet["salary"]);
+
+                        SingleTeacher = new Teacher()
                         {
-                            //return all information on all teachers
-                            int Id = Convert.ToInt32(ResultSet["teacherid"]);
-                            string FirstName = ResultSet["teacherfname"].ToString();
-                            string LastName = ResultSet["teacherlname"].ToString();
-                            string EmployeeNumber = ResultSet["employeenumber"].ToString();
-                            DateTime TeacherHireDate = Convert.ToDateTime(ResultSet["hiredate"]);
-                            float Salary = Convert.ToSingle(ResultSet["salary"]);
-
-                            SingleTeacher = new Teacher()
-                            {
-                                TeacherId = Id,
-                                TeacherFName = FirstName,
-                                TeacherLName = LastName,
-                                EmployeeNumber = EmployeeNumber,
-                                TeacherHireDate = TeacherHireDate,
-                                TeacherSalary = Salary,
-                            };
-                        }
+                            TeacherId = Id,
+                            TeacherFName = FirstName,
+                            TeacherLName = LastName,
+                            EmployeeNumber = EmployeeNumber,
+                            TeacherHireDate = TeacherHireDate,
+                            TeacherSalary = Salary,
+                        };
+                    }
 
 
-                        return SingleTeacher;
+                    return SingleTeacher;
 
-                    
+
 
                 }
 
@@ -150,12 +150,12 @@ namespace Cumulative1.Controllers
         /// </example>
         /// <returns>api/teacher/addteacher</returns>
         [HttpPost]
-        [Route(template:"AddTeacher")]
+        [Route(template: "AddTeacher")]
 
         public int AddTeacher([FromForm] string teacherfname, [FromForm] string teacherlname, [FromForm] string employeenumber, [FromForm] DateTime hiredate, [FromForm] float salary)
         {
             //error handling for teacher name empty
-            if(string.IsNullOrEmpty(teacherfname) || string.IsNullOrEmpty(teacherlname))
+            if (string.IsNullOrEmpty(teacherfname) || string.IsNullOrEmpty(teacherlname))
             {
                 return 0;
             }
@@ -181,31 +181,32 @@ namespace Cumulative1.Controllers
                 MySqlCommand Command = Connection.CreateCommand();
                 string SqlFormattedDate = hiredate.ToString("yyyy-MM-dd HH:mm:ss");
 
-				Command.CommandText = $"INSERT INTO teachers (teacherfname, teacherlname,employeenumber, hiredate, salary ) VALUES ('{teacherfname}','{teacherlname}', '{employeenumber}', '{SqlFormattedDate}',{salary})";
+                Command.CommandText = $"INSERT INTO teachers (teacherfname, teacherlname,employeenumber, hiredate, salary ) VALUES ('{teacherfname}','{teacherlname}', '{employeenumber}', '{SqlFormattedDate}',{salary})";
 
-				int numRowsAffected = Command.ExecuteNonQuery();
+                int numRowsAffected = Command.ExecuteNonQuery();
                 return Convert.ToInt32(Command.LastInsertedId);
 
             }
         }
 
         //Function for error handling
+        [ApiExplorerSettings(IgnoreApi = true)]
         public bool EmployeeNumberExists(string employeeNumber)
         {
-			using (MySqlConnection Connection = _context.AccessDatabase())
-			{
-				Connection.Open();
+            using (MySqlConnection Connection = _context.AccessDatabase())
+            {
+                Connection.Open();
 
-				MySqlCommand Command = Connection.CreateCommand();
+                MySqlCommand Command = Connection.CreateCommand();
                 Command.CommandText = $"SELECT * FROM teachers where employeenumber = '{employeeNumber}'";
 
-				using (MySqlDataReader ResultSet = Command.ExecuteReader())
+                using (MySqlDataReader ResultSet = Command.ExecuteReader())
                 {
                     return ResultSet.HasRows;
                 }
 
-			}
-		}
+            }
+        }
 
         /// <summary>
         /// Deletes teacher from the database. 
@@ -215,7 +216,7 @@ namespace Cumulative1.Controllers
         /// DELETE: api/TeacherPage/ListTeacher/DeleteTeacher {teacher id 1}
         /// </example>
         /// <returns></returns>
-        [HttpDelete(template:"DeleteTeacher/{teacherid}")]
+        [HttpDelete(template: "DeleteTeacher/{teacherid}")]
         public int DeleteTeacher(int teacherid)
         {
             Teacher requestedTeacher = SingleTeacher(teacherid);
@@ -232,11 +233,45 @@ namespace Cumulative1.Controllers
                 MySqlCommand Command = Connection.CreateCommand();
 
                 Command.CommandText = $"DELETE FROM teachers WHERE teacherid = {teacherid}";
-                
+
                 return Command.ExecuteNonQuery();
-                
+
             }
         }
-    }
+        /// <summary>
+        /// controller that 
+        /// Updates a teachers information for any of the fields 
+        /// provided within the initial form, the fields are also pre-populated with the
+        /// selected teachers information
+        /// </summary>
+        /// <example>
+        /// PUT: TeacherPage/ListTeacher/UpdateTeacher {Andrew Bennet id: 2...}
+        /// PUT: TeacherPage/ListTeacher/UpdateTeacher {Jane Doe id 4...}
+        /// </example>
+        /// <returns> updated information within the database. </returns>
+        [HttpPut(template: "UpdateTeacher/{teacherid}")]
+        public int UpdateTeacher([FromForm] string teacherfname, [FromForm] string teacherlname, [FromForm] string employeenumber, [FromForm] DateTime hiredate, [FromForm] float salary, [FromForm] int teacherid)
+        {
+            //error handling for update if teacher does not exist
+			Teacher requestedTeacher = SingleTeacher(teacherid);
 
+			if (requestedTeacher == null)
+			{
+				return 0;
+			}
+
+			using (MySqlConnection Connection = _context.AccessDatabase())
+            {
+                Connection.Open();
+                MySqlCommand Command = Connection.CreateCommand();
+                string SqlFormattedDate = hiredate.ToString("yyyy-MM-dd HH:mm:ss");
+
+                Command.CommandText = $"UPDATE teachers SET teacherfname = '{teacherfname}', teacherlname = '{teacherlname}',employeenumber = '{employeenumber}', hiredate = '{SqlFormattedDate}', salary = {salary} WHERE teacherid = {teacherid} ";
+
+
+                return Command.ExecuteNonQuery();
+            }
+           
+         }
+    }
 }

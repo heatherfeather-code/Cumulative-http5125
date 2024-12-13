@@ -137,6 +137,28 @@ namespace Cumulative1.Controllers
             }
                           
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="coursecode"></param>
+        /// <param name="teacherid"></param>
+        /// <param name="coursestartdate"></param>
+        /// <param name="courseenddate"></param>
+        /// <param name="coursename"></param>
+        /// <param name="courseid"></param>
+        /// <returns></returns>
+        [HttpPut(template: "UpdateCourse/{courseid}")]
+        public int UpdateCourse([FromForm] string coursecode, [FromForm] int teacherid, [FromForm] DateTime coursestartdate, [FromForm] DateTime courseenddate, [FromForm] string coursename, [FromForm] int courseid)
+        {
+            using (MySqlConnection Connection = _context.AccessDatabase())
+            {
+                Connection.Open();
+                MySqlCommand Command = Connection.CreateCommand();
+                Command.CommandText = $"UPDATE courses SET coursecode ='{coursecode}',teacherid ='{teacherid}',startdate = '{coursestartdate}', finishdate = '{courseenddate}', coursename ='{coursename}'WHERE courseid ={courseid}";
+
+                return Command.ExecuteNonQuery();
+            }
+        }
     }
        
 }

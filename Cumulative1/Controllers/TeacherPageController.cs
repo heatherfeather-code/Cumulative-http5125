@@ -23,6 +23,7 @@ namespace Cumulative1.Controllers
             Teacher SingleTeacher = _api.SingleTeacher(id);
             return View(SingleTeacher);
         }
+        //ADD Teacher Functionality
         //GET: TeacherPage/New
         [HttpGet]
         public IActionResult AddTeacher(int id)
@@ -61,5 +62,30 @@ namespace Cumulative1.Controllers
 
             return RedirectToAction("ListTeacher");
         }
+        
+        //UPDATE TEACHER FUNCTIONALIY
+
+        //GET: TeacherPage/Edit/{id}
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Teacher SelectedTeacher = _api.SingleTeacher (id);
+            return View (SelectedTeacher);
+        }
+
+        //POST: TeacherPage/UpdateTeacher/{id}
+
+        [HttpPost]
+        public IActionResult UpdateTeacher(Teacher teacherToUpdate)
+        {
+			int numRowsAffected = _api.UpdateTeacher(teacherToUpdate.TeacherFName, teacherToUpdate.TeacherLName, teacherToUpdate.EmployeeNumber, teacherToUpdate.TeacherHireDate, teacherToUpdate.TeacherSalary, teacherToUpdate.TeacherId);
+
+			if (numRowsAffected == 0)
+			{
+				return RedirectToAction("ListTeacher");
+			}
+
+			return RedirectToAction("ShowTeacher", new { id = teacherToUpdate.TeacherId });
+		}
     }
 } 
