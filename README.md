@@ -14,6 +14,7 @@ This project teaches data management within the context of connecting backend pr
 Database used allows a display of all teachers as well as displaying individual teachers and all information associated with the database entry via indexing. 
 
 This project also features add and delete functions while on localhost to add and delete teachers for the database while also handling errors for non existant teachers, missing information, future hire date and taken employee number. 
+Update: Created add functionality for students from previous initative. As well as did update functionlaity for both the students and courses. 
 # Usability:
 This project was completed for educational purposes, however, the content is a good example for the functionality of CRUD. 
 As well as how it works within a back end programming format, outside of database design alone. 
